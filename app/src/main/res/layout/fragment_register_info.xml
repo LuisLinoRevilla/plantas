@@ -5,35 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".RegisterFragment">
+    tools:context=".RegisterInfoFragment">
 
     <LinearLayout
-        android:id="@+id/headerRegister"
+        android:id="@+id/headerRegisterInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#E68900"
         android:orientation="vertical"
         android:paddingBottom="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:padding="6dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:id="@+id/ivBackInfo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:src="@android:drawable/ic_menu_revert"
-            app:tint="#FFFFFF"
-
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            app:tint="#FFFFFF" />
 
         <ImageView
-            android:id="@+id/ivMainIconReg"
+            android:id="@+id/ivMainIconInfo"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="16dp"
@@ -42,77 +38,62 @@
             app:tint="#FFFFFF" />
 
         <TextView
-            android:id="@+id/tvWelcomeReg"
+            android:id="@+id/tvWelcomeInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Bienvenido!"
+            android:text="Casi listo!"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvSubtitleReg"
+            android:id="@+id/tvSubtitleInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Regístrate para continuar"
+            android:text="Completa tu perfil para continuar"
             android:textColor="#E8F5E9"
             android:textSize="14sp" />
     </LinearLayout>
 
     <EditText
-        android:id="@+id/etName"
+        android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:drawable/editbox_background"
-        android:hint="Nombre:"
-        android:inputType="textPersonName"
+        android:hint="Teléfono:"
+        android:inputType="phone"
         android:paddingHorizontal="12dp"
-        app:layout_constraintTop_toBottomOf="@id/headerRegister" />
+        app:layout_constraintTop_toBottomOf="@id/headerRegisterInfo" />
 
     <EditText
-        android:id="@+id/etEmailReg"
+        android:id="@+id/etFavoritePlant"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:drawable/editbox_background"
-        android:hint="Correo:"
-        android:inputType="textEmailAddress"
+        android:hint="Planta favorita:"
+        android:inputType="text"
         android:paddingHorizontal="12dp"
-        app:layout_constraintTop_toBottomOf="@id/etName" />
-
-    <EditText
-        android:id="@+id/etPasswordReg"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:drawable/editbox_background"
-        android:hint="Contraseña:"
-        android:inputType="textPassword"
-        android:paddingHorizontal="12dp"
-        app:layout_constraintTop_toBottomOf="@id/etEmailReg" />
+        app:layout_constraintTop_toBottomOf="@id/etPhone" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnFinishRegister"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Registrar"
+        android:text="Comenzar"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:backgroundTint="#4CAF50"
         app:cornerRadius="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPasswordReg"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/etFavoritePlant" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
