@@ -26,14 +26,20 @@ class LoginFragment : Fragment() {
         binding.emailTied.addTextChangedListener{
             validateFields()
         }
+        binding.passwordTied.addTextChangedListener{
+            validateFields()
+        }
     }
 
     private fun validateFields{
         val email = binding.emailTied.text.toString().trim()
         val password = binding.passwordTied.text.toString().trim()
 
-        val isEmailValid = isValidemail(email)
+        val idEmailValid = isValidemail(email)
         val idpassword = password.length >= 8
+
+        binding.emailTil.error = if (emial.isNotEmpty() && isEmailValid) null else "correo invalido"
+        binding.passwordTil.error = if (password.isNotEmpty() && isEmailValid) null else "Minimo 8 caracteres"
 
     }
 
