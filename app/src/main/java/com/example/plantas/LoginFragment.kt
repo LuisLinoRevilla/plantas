@@ -31,27 +31,27 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupValidation() {
-        binding.singInButton.isEnabled = false
+        binding.btnLogin.isEnabled = false
 
-        binding.emailTied.addTextChangedListener {
+        binding.etEmail.addTextChangedListener {
             validateFields()
         }
-        binding.passwordTied.addTextChangedListener {
+        binding.etPassword.addTextChangedListener {
             validateFields()
         }
     }
 
     private fun validateFields() {
-        val email = binding.emailTied.text.toString().trim()
-        val password = binding.passwordTied.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
 
         val isEmailValid = isValidEmail(email)
         val isPasswordValid = password.length >= 8
 
-        binding.emailTil.error = if (email.isEmpty() || isEmailValid) null else "Correo inválido"
-        binding.passwordTil.error = if (password.isEmpty() || isPasswordValid) null else "Mínimo 8 caracteres"
+        binding.etEmail.error = if (email.isEmpty() || isEmailValid) null else "Correo inválido"
+        binding.etPassword.error = if (password.isEmpty() || isPasswordValid) null else "Mínimo 8 caracteres"
 
-        binding.singInButton.isEnabled = isEmailValid && isPasswordValid
+        binding.btnLogin.isEnabled = isEmailValid && isPasswordValid
     }
 
     private fun setupClickListeners() {
