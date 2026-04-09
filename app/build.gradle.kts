@@ -4,11 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.plantas"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36  // Corregido
 
     defaultConfig {
         applicationId = "com.example.plantas"
@@ -29,9 +25,14 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
