@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.plantas.core.FragmentCommunicator
 import com.example.plantas.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -17,11 +18,14 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<SigninViewModel>()
 
+    private lateinit var communicator: FragmentCommunicator
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        communicator.manageLoader(true)
         return binding.root
     }
 
