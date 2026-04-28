@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.plantas.core.FragmentCommunicator
 import com.example.plantas.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
