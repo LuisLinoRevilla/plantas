@@ -7,8 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.plantas.core.FragmentCommunicator
+import com.example.plantas.core.ResponseService
 import com.example.plantas.databinding.FragmentLoginBinding
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -23,7 +30,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        communicator.manageLoader(true)
+        // Inicializar communicator - tu Activity debe implementar esta interfaz
+        communicator = activity as FragmentCommunicator
         return binding.root
     }
 
@@ -32,6 +40,7 @@ class LoginFragment : Fragment() {
 
         setupValidation()
         setupClickListeners()
+        observeState()
     }
 
     private fun setupValidation() {
@@ -59,6 +68,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+            viewModel.requestLogin(email, password) // ✅ Llamar al login
+        }
+
         binding.tvRegisterLink.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -70,6 +85,32 @@ class LoginFragment : Fragment() {
 
     private fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun observeState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.signInState.collect { state ->
+                    when (state) {
+                        is ResponseService.Loading -> {
+                            communicator.manageLoader(true)
+                            binding.btnLogin.isEnabled = false
+                        }
+                        is ResponseService.Success -> {
+                            communicator.manageLoader(false)
+                            // TODO: navegar a MainActivity
+                            Snackbar.make(binding.root, "Login exitoso", Snackbar.LENGTH_LONG).show()
+                        }
+                        is ResponseService.Error -> {
+                            communicator.manageLoader(false)
+                            binding.btnLogin.isEnabled = true
+                            Snackbar.make(binding.root, state.error, Snackbar.LENGTH_LONG).show()
+                        }
+                        null -> Unit
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
