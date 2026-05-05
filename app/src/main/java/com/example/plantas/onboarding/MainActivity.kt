@@ -1,4 +1,4 @@
-package com.example.plantas
+package com.example.plantas.onboarding
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

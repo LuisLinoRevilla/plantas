@@ -1,4 +1,4 @@
-package com.example.plantas.singup
+package com.example.plantas.onboarding.singUp
 
 import android.os.Bundle
 import android.util.Patterns

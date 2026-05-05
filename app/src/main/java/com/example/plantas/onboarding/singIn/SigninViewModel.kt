@@ -1,11 +1,9 @@
-package com.example.plantas
+package com.example.plantas.onboarding.singIn
 
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.plantas.core.AuthRepository
-import com.example.plantas.core.Authentication
 import com.example.plantas.core.ResponseService
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow

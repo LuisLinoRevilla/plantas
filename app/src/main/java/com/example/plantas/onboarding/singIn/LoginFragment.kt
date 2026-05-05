@@ -1,16 +1,18 @@
-package com.example.plantas
+package com.example.plantas.onboarding.singIn
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.plantas.R
 import com.example.plantas.core.FragmentCommunicator
 import com.example.plantas.core.ResponseService
 import com.example.plantas.databinding.FragmentLoginBinding
@@ -84,7 +86,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun isValidEmail(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun observeState() {
