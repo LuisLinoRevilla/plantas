@@ -1,4 +1,4 @@
-package com.example.plantas.onboarding
+package com.example.plantas.onboarding.personal
 
 import android.os.Bundle
 import android.view.LayoutInflater

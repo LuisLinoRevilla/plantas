@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_forgot_password" />
     <fragment
         android:id="@+id/registerInfoFragment"
-        android:name="com.example.plantas.onboarding.RegisterInfoFragment"
+        android:name="com.example.plantas.onboarding.personal.RegisterInfoFragment"
         android:label="fragment_register_info"
         tools:layout="@layout/fragment_register_info" />
 </navigation>

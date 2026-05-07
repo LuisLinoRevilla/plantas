@@ -1,0 +1,24 @@
+package com.example.plantas.core.repositories
+
+import com.example.plantas.core.ResponseService
+import com.example.plantas.onboarding.personal.model.UserProfile
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
+class UserRepository: UserService {
+    private val firestore = FirebaseFirestore.getInstance()
+    private val userCollection = firestore.collection("users")
+    override suspend fun seveUserInfo(userProfile: UserProfile): ResponseService<Unit> = withContext(
+        Dispatchers.IO){
+        try{
+            userCollection.document(userProfile.id
+                .set(userProfile)
+                .await()
+            ResponseService.Succes(Unit)
+        }
+        catch{}
+
+    }
+
+}
