@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home"
+    app:startDestination="@id/misPlantasFragment">
+
+    <fragment
+        android:id="@+id/misPlantasFragment"
+        android:name="com.example.plantas.home.misPlantas.MisPlantasFragment"
+        android:label="Mis Plantas"
+        tools:layout="@layout/fragment_mis_plantas" />
+
+    <fragment
+        android:id="@+id/explorarFragment"
+        android:name="com.example.plantas.home.explorar.ExplorarFragment"
+        android:label="Explorar"
+        tools:layout="@layout/fragment_explorar" />
+
+    <fragment
+        android:id="@+id/AccountFragment"
+        android:name="com.example.plantas.home.account.AccountFragment"
+        android:label="Cuenta"
+        tools:layout="@layout/fragment_account" />
+
+</navigation>
