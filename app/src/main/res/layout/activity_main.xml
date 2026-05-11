@@ -20,9 +20,11 @@
         app:navGraph="@navigation/nav_onboarding" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loaderContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
+        android:elevation="10dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +41,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/Growing_plant"/>
+            app:lottie_rawRes="@raw/growing_plant"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

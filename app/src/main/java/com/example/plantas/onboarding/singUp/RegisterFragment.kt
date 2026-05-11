@@ -1,5 +1,6 @@
 package com.example.plantas.onboarding.singUp
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -7,14 +8,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.plantas.R
+import com.example.plantas.core.FragmentCommunicator
+import com.example.plantas.core.ResponseService
 import com.example.plantas.databinding.FragmentRegisterBinding
+import com.example.plantas.signup.RegisterViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    // 1. Conectamos el ViewModel
+    private val viewModel by viewModels<RegisterViewModel>()
+    private lateinit var communicator: FragmentCommunicator
+
+    // 2. Conectamos el comunicador para la pantalla de carga (sábana blanca)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            communicator = context as FragmentCommunicator
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$context debe implementar FragmentCommunicator")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +53,10 @@ class RegisterFragment : Fragment() {
 
         setupValidation()
         setupClickListeners()
+        observeState() // 3. Iniciamos el observador
     }
 
     private fun setupValidation() {
-        // El botón comienza deshabilitado
         binding.btnRegister.isEnabled = false
 
         binding.etName.addTextChangedListener { validateFields() }
@@ -62,7 +86,40 @@ class RegisterFragment : Fragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_registerInfoFragment)
+            // 4. En lugar de navegar directo, llamamos a Firebase
+            val email = binding.etEmailReg.text.toString().trim()
+            val password = binding.etPasswordReg.text.toString().trim()
+            viewModel.requestSignUp(email, password)
+        }
+    }
+
+    private fun observeState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.registerState.collect { state ->
+                    when (state) {
+                        is ResponseService.Loading -> {
+                            communicator.manageLoader(true)
+                            binding.btnRegister.isEnabled = false
+                        }
+                        is ResponseService.Success -> {
+                            communicator.manageLoader(false)
+                            binding.btnRegister.isEnabled = true
+
+                            // 5. ¡Si Firebase dice que todo salió bien, AHORA SÍ navegamos!
+                            findNavController().navigate(R.id.action_registerFragment_to_registerInfoFragment)
+                        }
+                        is ResponseService.Error -> {
+                            communicator.manageLoader(false)
+                            binding.btnRegister.isEnabled = true
+
+                            // Mostramos el error (Ej: "El correo ya está registrado")
+                            Snackbar.make(binding.root, state.error, Snackbar.LENGTH_LONG).show()
+                        }
+                        null -> Unit
+                    }
+                }
+            }
         }
     }
 

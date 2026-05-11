@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.example.plantas.core.FragmentCommunicator
 import com.example.plantas.databinding.ActivityMainBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), FragmentCommunicator {
     private lateinit var binding: ActivityMainBinding
@@ -23,9 +26,14 @@ class MainActivity : AppCompatActivity(), FragmentCommunicator {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        lifecycleScope.launch {
+            delay(3000)
+            binding.loaderContainer.isVisible = false
+        }
     }
 
     override fun manageLoader(isVisible: Boolean) {
-        binding.loaderView.isVisible = isVisible
+        binding.loaderContainer.isVisible = isVisible
     }
 }

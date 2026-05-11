@@ -1,5 +1,7 @@
 package com.example.plantas.onboarding.singIn
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import com.example.plantas.R
 import com.example.plantas.core.FragmentCommunicator
 import com.example.plantas.core.ResponseService
 import com.example.plantas.databinding.FragmentLoginBinding
+import com.example.plantas.home.HomeActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -23,17 +26,25 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by viewModels<SigninViewModel>()
+
+    private val viewModel by viewModels<SignInViewModel>()
 
     private lateinit var communicator: FragmentCommunicator
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            communicator = context as FragmentCommunicator
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$context debe implementar FragmentCommunicator")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        // Inicializar communicator - tu Activity debe implementar esta interfaz
-        communicator = activity as FragmentCommunicator
         return binding.root
     }
 
@@ -48,12 +59,8 @@ class LoginFragment : Fragment() {
     private fun setupValidation() {
         binding.btnLogin.isEnabled = false
 
-        binding.etEmail.addTextChangedListener {
-            validateFields()
-        }
-        binding.etPassword.addTextChangedListener {
-            validateFields()
-        }
+        binding.etEmail.addTextChangedListener { validateFields() }
+        binding.etPassword.addTextChangedListener { validateFields() }
     }
 
     private fun validateFields() {
@@ -73,7 +80,7 @@ class LoginFragment : Fragment() {
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
-            viewModel.requestLogin(email, password) // ✅ Llamar al login
+            viewModel.requestLogin(email, password)
         }
 
         binding.tvRegisterLink.setOnClickListener {
@@ -91,7 +98,7 @@ class LoginFragment : Fragment() {
 
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.signInState.collect { state ->
                     when (state) {
                         is ResponseService.Loading -> {
@@ -100,12 +107,22 @@ class LoginFragment : Fragment() {
                         }
                         is ResponseService.Success -> {
                             communicator.manageLoader(false)
-                            // TODO: navegar a MainActivity
-                            Snackbar.make(binding.root, "Login exitoso", Snackbar.LENGTH_LONG).show()
+                            binding.btnLogin.isEnabled = true
+
+                            // Mensaje opcional de éxito
+                            Snackbar.make(binding.root, "Login exitoso", Snackbar.LENGTH_SHORT).show()
+
+                            // ¡EL SALTO A LA PANTALLA PRINCIPAL!
+                            val intent = Intent(requireContext(), HomeActivity::class.java)
+                            startActivity(intent)
+
+                            // Cerramos el MainActivity (donde vive el Login) para no poder regresar
+                            requireActivity().finish()
                         }
                         is ResponseService.Error -> {
                             communicator.manageLoader(false)
                             binding.btnLogin.isEnabled = true
+                            // state.error contiene el mensaje de tu ResponseService
                             Snackbar.make(binding.root, state.error, Snackbar.LENGTH_LONG).show()
                         }
                         null -> Unit
