@@ -17,11 +17,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Inicializamos el binding
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Usamos binding.main en lugar de findViewById
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -32,14 +30,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        // Obtenemos el NavHostFragment que está en tu activity_home.xml
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
-
-        // Obtenemos el controlador de navegación
         val navController = navHostFragment.navController
 
-        // Vinculamos el menú inferior con el controlador para que cambie de pantalla al hacer clic
+        binding.bottomNavigationView.itemIconTintList = null
+
         binding.bottomNavigationView.setupWithNavController(navController)
     }
 }
