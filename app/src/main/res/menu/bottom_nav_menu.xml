@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/MisPlantasFragment"
+        android:id="@+id/misPlantasFragment"
         android:icon="@drawable/mis_plantas_ic"
         android:title="Mis plantas"/>
     <item
-        android:id="@+id/ExplorarFragment"
+        android:id="@+id/explorarFragment"
         android:icon="@drawable/explorar_ic"
         android:title="Explorar"/>
     <item
         android:id="@+id/AccountFragment"
         android:icon="@drawable/account_ic"
         android:title="Cuenta"/>
-
 </menu>
