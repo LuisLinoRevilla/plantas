@@ -16,6 +16,9 @@ lottie = "6.7.1"
 #versiones para Firebase
 firebaseBom = "34.12.0"
 googleServices = "4.4.4"
+#versiones para retrofit
+retrofit = "2.11.0"
+okhttpLoggin = "4.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,6 +39,11 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-firestore = {group = "com.google.firebase", name = "firebase-firestore"}
 firebase-auth = {group = "com.google.firebase", name = "firebase-auth"}
+
+#librerias retrofit
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+okhttp-loggin = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLoggin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
