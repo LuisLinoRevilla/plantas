@@ -38,4 +38,5 @@ class HomeActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setupWithNavController(navController)
     }
+    override fun manageLoader(isVisible: Boolean){}
 }
