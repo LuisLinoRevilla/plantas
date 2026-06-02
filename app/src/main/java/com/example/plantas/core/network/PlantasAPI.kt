@@ -10,5 +10,5 @@ interface PlantasAPI {
         @Query("key") apiKey: String,
         @Query("page") page: Int = 1,
         @Query("q") query: String? = null
-    ): Response  // Retorna Response que contiene la lista de Planta
+    ): Response <PlantaResponse> // Retorna Response que contiene la lista de Planta
 }

@@ -16,9 +16,11 @@ data class Planta(
     @SerializedName("family") val family: String?,
     @SerializedName("genus") val genus: String,
     @SerializedName("default_image") val defaultImage: PlantImage?  // Puede ser null
-)
+): Parcelable{
+    fun describeContents(): Int
+    fun writeToParcel(dest: Parcel, flags: Int)
+}
 
-// Para la imagen (es opcional, a veces viene null)
 data class PlantImage(
     @SerializedName("license") val license: Int?,
     @SerializedName("license_name") val licenseName: String?,

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.services)  // Plugin de Google Services
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
