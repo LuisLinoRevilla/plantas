@@ -1,33 +1,10 @@
 package com.example.plantas.core.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 // Respuesta completa de la API
-data class Response(
-    @SerializedName("data") val data: List<Planta>  // La API usa "data", no "results"
-)
-
-// Para cada planta individual
-data class Planta(
-    @SerializedName("id") val id: Int,
-    @SerializedName("common_name") val commonName: String,
-    @SerializedName("scientific_name") val scientificName: List<String>,
-    @SerializedName("other_name") val otherName: List<String>,
-    @SerializedName("family") val family: String?,
-    @SerializedName("genus") val genus: String,
-    @SerializedName("default_image") val defaultImage: PlantImage?  // Puede ser null
-): Parcelable{
-    fun describeContents(): Int
-    fun writeToParcel(dest: Parcel, flags: Int)
-}
-
-data class PlantImage(
-    @SerializedName("license") val license: Int?,
-    @SerializedName("license_name") val licenseName: String?,
-    @SerializedName("license_url") val licenseUrl: String?,
-    @SerializedName("original_url") val originalUrl: String?,
-    @SerializedName("regular_url") val regularUrl: String?,
-    @SerializedName("medium_url") val mediumUrl: String?,
-    @SerializedName("small_url") val smallUrl: String?,
-    @SerializedName("thumbnail") val thumbnail: String?
+data class PlantasResponse(
+    @SerializedName("data") val data: List<Planta>
 )

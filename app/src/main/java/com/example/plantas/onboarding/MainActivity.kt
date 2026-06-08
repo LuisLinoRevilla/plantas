@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.example.plantas.core.FragmentCommunicator
 import com.example.plantas.databinding.ActivityMainBinding
+import com.google.firebase.FirebaseApp // <-- Importación obligatoria
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity(), FragmentCommunicator {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        FirebaseApp.initializeApp(this)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

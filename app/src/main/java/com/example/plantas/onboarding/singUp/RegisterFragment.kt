@@ -102,12 +102,20 @@ class RegisterFragment : Fragment() {
                             communicator.manageLoader(true)
                             binding.btnRegister.isEnabled = false
                         }
+                        // Cambia tu bloque de Success en observeState() dentro de RegisterFragment.kt
                         is ResponseService.Success -> {
                             communicator.manageLoader(false)
                             binding.btnRegister.isEnabled = true
 
-                            // 5. ¡Si Firebase dice que todo salió bien, AHORA SÍ navegamos!
-                            findNavController().navigate(R.id.action_registerFragment_to_registerInfoFragment)
+                            // Capturamos el nombre
+                            val nombre = binding.etName.text.toString().trim()
+
+                            // Lo ponemos en un bundle
+                            val bundle = Bundle()
+                            bundle.putString("nombre_usuario", nombre)
+
+                            // Navegamos pasando el bundle
+                            findNavController().navigate(R.id.action_registerFragment_to_registerInfoFragment, bundle)
                         }
                         is ResponseService.Error -> {
                             communicator.manageLoader(false)

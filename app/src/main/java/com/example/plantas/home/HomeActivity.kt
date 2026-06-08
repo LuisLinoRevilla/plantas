@@ -8,9 +8,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.plantas.R
+import com.example.plantas.core.FragmentCommunicator
 import com.example.plantas.databinding.ActivityHomeBinding
 
-class HomeActivity : AppCompatActivity() {
+// Agregamos la interfaz separada por una coma
+class HomeActivity : AppCompatActivity(), FragmentCommunicator {
+
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,5 +41,8 @@ class HomeActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setupWithNavController(navController)
     }
-    override fun manageLoader(isVisible: Boolean){}
+
+    override fun manageLoader(isVisible: Boolean) {
+
+    }
 }

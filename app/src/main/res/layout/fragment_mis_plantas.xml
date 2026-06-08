@@ -1,14 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/verde_claro_fondo"
     tools:context=".home.misPlantas.MisPlantasFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <View
+        android:id="@+id/headerGarden"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="140dp"
+        android:background="@color/verde_principal"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/txtTituloMisPlantas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:text="Mi Jardín"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtSubtituloMisPlantas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:text="Tus compañeras verdes bajo cuidado"
+        android:textColor="@color/verde_claro_fondo"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTituloMisPlantas" />
+
+    <LinearLayout
+        android:id="@+id/layoutListaVacia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerGarden">
+
+        <ImageView
+            android:id="@+id/imgEmptyGarden"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icono_flor"
+            android:layout_marginBottom="16dp"
+            app:tint="@color/texto_oscuro"
+            android:alpha="0.6"/>
+
+        <TextView
+            android:id="@+id/txtListaVacia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="32dp"
+            android:text="Aún no tienes plantas guardadas.\n¡Explora y agrega algunas a tu colección!"
+            android:textAlignment="center"
+            android:textColor="@color/texto_oscuro"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMisPlantas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="88dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerGarden"
+        tools:listitem="@layout/item_planta_favorita" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAgregarManual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:src="@android:drawable/ic_input_add"
+        android:contentDescription="Agregar planta manual"
+        app:backgroundTint="@color/naranja_cempasuchil"
+        app:tint="@color/white"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
-class AuthRepository() : Authentication {
+class AuthRepository : Authentication {
     private val auth = FirebaseAuth.getInstance()
 
     override suspend fun requestLogin(
@@ -47,5 +47,9 @@ class AuthRepository() : Authentication {
         } catch (e: Exception) {
             ResponseService.Error("Error inesperado. Intenta de nuevo")
         }
+    }
+
+    override suspend fun signOut() = withContext(Dispatchers.IO) {
+        auth.signOut()
     }
 }
