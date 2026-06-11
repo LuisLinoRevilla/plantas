@@ -9,18 +9,64 @@
         android:id="@+id/misPlantasFragment"
         android:name="com.example.plantas.home.misPlantas.MisPlantasFragment"
         android:label="Mis Plantas"
-        tools:layout="@layout/fragment_mis_plantas" />
+        tools:layout="@layout/fragment_mis_plantas">
+
+        <action
+            android:id="@+id/action_misPlantasFragment_to_detalleFavoritaFragment"
+            app:destination="@id/detalleFavoritaFragment" />
+
+        <action
+            android:id="@+id/action_misPlantasFragment_to_agregarManualFragment"
+            app:destination="@id/agregarManualFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/explorarFragment"
         android:name="com.example.plantas.home.explorar.ExplorarFragment"
         android:label="Explorar"
-        tools:layout="@layout/fragment_explorar" />
+        tools:layout="@layout/fragment_explorar">
+
+        <action
+            android:id="@+id/action_explorarFragment_to_detallesPlantaFragment"
+            app:destination="@id/detallesPlantaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detallesPlantaFragment"
+        android:name="com.example.plantas.home.detallesPlanta.DetallesPlantaFragment"
+        android:label="Detalles de la Planta"
+        tools:layout="@layout/fragment_detalles_planta">
+
+        <argument
+            android:name="planta"
+            app:argType="com.example.plantas.core.model.Planta" />
+    </fragment>
 
     <fragment
         android:id="@+id/AccountFragment"
         android:name="com.example.plantas.home.account.AccountFragment"
         android:label="Cuenta"
         tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/detalleFavoritaFragment"
+        android:name="com.example.plantas.home.misPlantas.DetalleFavoritaFragment"
+        android:label="Mi Planta"
+        tools:layout="@layout/fragment_detalles_planta"> <argument
+        android:name="planta_favorita"
+        app:argType="com.example.plantas.core.database.PlantaFavorita" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/agregarManualFragment"
+        android:name="com.example.plantas.home.misPlantas.AgregarManualFragment"
+        android:label="Agregar Planta"
+        tools:layout="@layout/fragment_agregar_manual">
+
+        <action
+            android:id="@+id/action_agregarManualFragment_to_explorarFragment"
+            app:destination="@id/explorarFragment" />
+
+    </fragment>
 
 </navigation>
