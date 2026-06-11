@@ -3,5 +3,5 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.firebase) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
-    alias(libs.plugins.ksp) apply false // <-- AGREGA ESTA LÍNEA
+    alias(libs.plugins.ksp) apply false
 }
